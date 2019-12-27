@@ -1,0 +1,4 @@
+cd /home/ec2-user
+source environment/bin/activate
+python manage.py collectstatic --noinput
+/usr/local/bin/supervisord -c /home/ec2-user/supervisord.conf

@@ -1,0 +1,9 @@
+#!/bin/bash
+yum update
+easy_install pip
+pip install supervisor==3.3.4
+yum -y install python36 python36-virtualenv python36-pip
+cd /home/ec2-user
+virtualenv-3.6 environment
+source environment/bin/activate
+pip install -r requirements.txt

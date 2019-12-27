@@ -1,0 +1,43 @@
+version: 0.0
+os: linux
+files:
+ - source: /ec2django/
+   destination: /home/ec2-user/ec2django
+ - source: /helloworld/
+   destination: /home/ec2-user/helloworld
+ - source: /manage.py
+   destination: /home/ec2-user
+ - source: /supervisord.conf
+   destination: /home/ec2-user
+ - source: /requirements.txt
+   destination: /home/ec2-user
+ - source: /requirements/
+   destination: /home/ec2-user/requirements
+
+permissions:
+  - object: /home/ec2-user/manage.py
+    owner: ec2-user
+    mode: 644
+    type:
+      - file
+  - object: /home/ec2-user/supervisord.conf
+    owner: ec2-user
+    mode: 644
+    type:
+      - file
+hooks:
+  AfterInstall:
+    - location: scripts/install_dependencies
+      timeout: 300
+      runas: root
+    - location: scripts/codestar_remote_access
+      timeout: 300
+      runas: root
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
