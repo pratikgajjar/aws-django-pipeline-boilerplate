@@ -1,2 +1,2 @@
 # dependencies common to all environments
-Django==1.11.18
+Django==1.11.23
